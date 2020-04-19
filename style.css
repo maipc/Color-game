@@ -1,0 +1,43 @@
+html,
+body {
+    text-align: center;
+    background: black;
+}
+
+.jumbotron {
+    height: 20%;
+}
+
+.title {
+    background: #3b76a9;
+    color: white;
+}
+
+.display-4 {
+    font-size: 4rem;
+    font-weight: 500;
+}
+
+.lead {
+    font-size: 2rem;
+}
+
+.controller {
+    background: white;
+}
+
+.btn-light {
+    background: white;
+    color: #3b76a9;
+    font-weight: bold;
+}
+
+.container {
+    width: 50%;
+}
+
+.card {
+    width: 30%;
+    padding-bottom: 30%;
+    background: white;
+}
