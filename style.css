@@ -41,3 +41,8 @@ body {
     padding-bottom: 30%;
     background: white;
 }
+
+.selected {
+    background: #3b76a9;
+    color: white;
+}
