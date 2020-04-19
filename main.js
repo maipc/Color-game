@@ -6,12 +6,10 @@ var goalColor = document.querySelector("#goal");
 var options = document.querySelectorAll(".d-flex .card");
 var hintString = document.querySelector("#correctString");
 var header = document.querySelector(".title");
-var mode = 1; // 0: easy, 1: hard
-var answer = Math.floor(Math.random() * 6);
+var optionNumber = 6;
 
 easyMode.addEventListener("click", function () {
-  mode = 0;
-  answer = Math.floor(Math.random() * 3);
+  optionNumber = 3;
   row2.classList.remove("d-flex");
   row2.classList.add("d-none");
   easyMode.classList.add("selected");
@@ -20,8 +18,7 @@ easyMode.addEventListener("click", function () {
 });
 
 hardMode.addEventListener("click", function () {
-  mode = 1;
-  answer = Math.floor(Math.random() * 6);
+  optionNumber = 6;
   row2.classList.remove("d-none");
   row2.classList.add("d-flex");
   easyMode.classList.remove("selected");
@@ -36,9 +33,10 @@ function startGame() {
   goalColor.textContent = generateColor();
   hintString.classList.add("d-none");
   header.style.background = "#3b76a9";
+  var ans = Math.floor(Math.random()*optionNumber);
   for (var i = 0; i < options.length; i++) {
     // init color
-    if (i === answer) {
+    if (i === ans) {
       addColor(i, goalColor.textContent);
     } else {
       addColor(i, generateColor());
@@ -50,7 +48,7 @@ function startGame() {
         hintString.textContent = "Correct!";
         winGame();
       } else {
-        this.style.background = "black";
+        this.style.background = "#232323";
         hintString.textContent = "Try again";
       }
       hintString.classList.remove("d-none");

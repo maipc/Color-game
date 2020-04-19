@@ -1,7 +1,7 @@
 html,
 body {
     text-align: center;
-    background: black;
+    background: #232323;
 }
 
 .jumbotron {
@@ -27,9 +27,14 @@ body {
 }
 
 .btn-light {
-    background: white;
+    background: none;
     color: #3b76a9;
     font-weight: bold;
+}
+
+.btn-light:hover {
+    background: #3b76a9;
+    color: white;
 }
 
 .container {
