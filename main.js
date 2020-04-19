@@ -14,6 +14,7 @@ easyMode.addEventListener("click", function () {
   answer = Math.floor(Math.random() * 3);
   row2.classList.remove("d-flex");
   row2.classList.add("d-none");
+  startGame();
 });
 
 hardMode.addEventListener("click", function () {
@@ -21,6 +22,7 @@ hardMode.addEventListener("click", function () {
   answer = Math.floor(Math.random() * 6);
   row2.classList.remove("d-none");
   row2.classList.add("d-flex");
+  startGame();
 });
 
 newGame.addEventListener("click", startGame);
