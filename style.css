@@ -45,6 +45,7 @@ body {
     width: 30%;
     padding-bottom: 30%;
     background: white;
+    border-radius: 30px;
 }
 
 .selected {

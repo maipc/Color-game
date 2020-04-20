@@ -1,58 +1,64 @@
 var newGame = document.querySelector("#newGame");
-var easyMode = document.querySelector("#easy");
-var hardMode = document.querySelector("#hard");
-var row2 = document.querySelector(".row2");
+var mode = document.querySelectorAll(".mode");
 var goalColor = document.querySelector("#goal");
 var options = document.querySelectorAll(".d-flex .card");
 var hintString = document.querySelector("#correctString");
 var header = document.querySelector(".title");
 var optionNumber = 6;
 
-easyMode.addEventListener("click", function () {
-  optionNumber = 3;
-  row2.classList.remove("d-flex");
-  row2.classList.add("d-none");
-  easyMode.classList.add("selected");
-  hardMode.classList.remove("selected");
-  startGame();
-});
-
-hardMode.addEventListener("click", function () {
-  optionNumber = 6;
-  row2.classList.remove("d-none");
-  row2.classList.add("d-flex");
-  easyMode.classList.remove("selected");
-  hardMode.classList.add("selected");
-  startGame();
-});
+for (var i = 0; i < mode.length; i++) {
+  mode[i].addEventListener("click", function () {
+    mode[0].classList.remove("selected");
+    mode[1].classList.remove("selected");
+    this.classList.add("selected");
+    if (this.textContent === "EASY") {
+      optionNumber = 3;
+    } else {
+      optionNumber = 6;
+    }
+    startGame();
+  });
+}
 
 newGame.addEventListener("click", startGame);
+
+startGame();
 
 function startGame() {
   newGame.textContent = "NEW COLORS";
   goalColor.textContent = generateColor();
-  hintString.classList.add("d-none");
+  hintString.textContent = "";
   header.style.background = "#3b76a9";
-  var ans = Math.floor(Math.random()*optionNumber);
+  var ans = Math.floor(Math.random() * optionNumber);
+  // init color
   for (var i = 0; i < options.length; i++) {
-    // init color
     if (i === ans) {
       addColor(i, goalColor.textContent);
+    } else if (i >= optionNumber) {
+      addColor(i, "#232323");
     } else {
       addColor(i, generateColor());
     }
+  }
 
-    // add addEventListener
-    options[i].addEventListener("click", function () {
-      if (this.style.background === goalColor.textContent.toLowerCase()) {
-        hintString.textContent = "Correct!";
-        winGame();
-      } else {
-        this.style.background = "#232323";
-        hintString.textContent = "Try again";
-      }
-      hintString.classList.remove("d-none");
-    });
+  // add addEventListener
+  for (var i = 0; i < optionNumber; i++) {
+    options[i].addEventListener("click", checkAnswer);
+  }
+
+  // remove unused listener
+  for (var i = optionNumber; i < options.length; i++) {
+    options[i].removeEventListener("click", checkAnswer);
+  }
+}
+
+function checkAnswer(event) {
+  if (event.target.style.background === goalColor.textContent.toLowerCase()) {
+    hintString.textContent = "Correct!";
+    winGame();
+  } else {
+    event.target.style.background = "#232323";
+    hintString.textContent = "Try again";
   }
 }
 
@@ -73,11 +79,9 @@ function generateColor() {
 }
 
 function winGame() {
-  for (var i = 0; i < options.length; i++) {
+  for (var i = 0; i < optionNumber; i++) {
     addColor(i, goalColor.textContent);
   }
   newGame.textContent = "PLAY AGAIN?";
   header.style.background = goalColor.textContent;
 }
-
-startGame();
